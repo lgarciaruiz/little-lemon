@@ -14,19 +14,19 @@ import com.example.littlelemon.storage.UserPreferences
 
 
 @Composable
-fun NavigationComposable(navController: NavHostController) {
+fun NavigationComposable(navHostController: NavHostController) {
     val userSettings = UserPreferences.getUser(LocalContext.current)
-    val startDestination = if (userSettings == null) OnboardingDestination.route else Profile.route
+    val startDestination = if (userSettings == null) OnboardingDestination.route else Home.route
 
-    NavHost(navController = navController, startDestination = startDestination) {
+    NavHost(navController = navHostController, startDestination = startDestination) {
         composable(OnboardingDestination.route){
-            Onboarding(navController = navController)
+            Onboarding(navHostController = navHostController)
         }
         composable(Home.route){
-            Home()
+            Home(navHostController = navHostController)
         }
         composable(Profile.route){
-            Profile(navHostController = navController)
+            Profile(navHostController = navHostController)
         }
     }
 }

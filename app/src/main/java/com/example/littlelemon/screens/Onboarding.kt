@@ -28,7 +28,7 @@ import com.example.littlelemon.model.User
 import com.example.littlelemon.storage.UserPreferences
 
 @Composable
-fun Onboarding(modifier: Modifier = Modifier, navController: NavHostController) {
+fun Onboarding(modifier: Modifier = Modifier, navHostController: NavHostController) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -53,15 +53,15 @@ fun Onboarding(modifier: Modifier = Modifier, navController: NavHostController) 
             LLInput(label = "Last Name", text = lastName, showError = showError && lastName.isEmpty()){lastName = it}
             Spacer(modifier = Modifier.padding(10.dp))
             LLInput(label = "Email", text = email, placeholderText = "example@gmail.com", showError = showError && email.isEmpty()){email = it}
-            LLButton(text = "Register", modifier = Modifier.padding(20.dp).fillMaxWidth()) {
-                if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
-                    showError = true
-                } else {
-                    val user = User(firstName, lastName, email)
-                    UserPreferences.saveUser(context, user)
-                    println("pressedbutton")
-                    navController.navigate(Home.route)
-                }
+           }
+        LLButton(text = "Register", modifier = Modifier.padding(20.dp).fillMaxWidth()) {
+            if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
+                showError = true
+            } else {
+                val user = User(firstName, lastName, email)
+                //save user to shared preferences and navigate to home screen
+                UserPreferences.saveUser(context, user)
+                navHostController.navigate(Home.route)
             }
         }
     }
@@ -71,5 +71,5 @@ fun Onboarding(modifier: Modifier = Modifier, navController: NavHostController) 
 @Preview
 fun OnboardingPreview(){
     val navController = rememberNavController()
-    Onboarding(navController = navController)
+    Onboarding(navHostController = navController)
 }

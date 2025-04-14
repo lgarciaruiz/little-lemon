@@ -62,6 +62,7 @@ fun Profile(modifier: Modifier = Modifier, navHostController: NavHostController)
                 .fillMaxWidth()
                 .padding(0.dp, 20.dp, 0.dp)
         ) {
+            //clear user data and navigate to onboarding; log out
             UserPreferences.clearUser(context)
             navHostController.navigate(Onboarding.route)
         }

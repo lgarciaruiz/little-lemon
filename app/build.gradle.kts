@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("kapt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -40,7 +42,13 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.4.3")
+    implementation(libs.androidx.runtime.livedata)
+    kapt("androidx.room:room-compiler:2.4.3")
     implementation(libs.androidx.core.ktx)
+    implementation(libs.ktor.client.core.android)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
