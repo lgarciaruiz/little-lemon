@@ -66,8 +66,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             LittleLemonTheme {
                 val databaseMenuItems = menuDb.menuItemDao().getAll().observeAsState(emptyList()).value
+                val menuCategories = menuDb.menuItemDao().getCategories().observeAsState(emptyList()).value
                 val navController = rememberNavController()
-                NavigationComposable(navController, databaseMenuItems)
+                NavigationComposable(navController, databaseMenuItems, menuCategories)
             }
         }
     }

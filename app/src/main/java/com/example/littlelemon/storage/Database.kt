@@ -33,6 +33,9 @@ interface MenuItemDao {
 
     @Query("SELECT (SELECT COUNT(*) FROM MenuItemRoom) == 0")
     fun isEmpty(): Boolean
+
+    @Query("SELECT DISTINCT category FROM MenuItemRoom")
+    fun getCategories(): LiveData<List<String>>
 }
 
 //database

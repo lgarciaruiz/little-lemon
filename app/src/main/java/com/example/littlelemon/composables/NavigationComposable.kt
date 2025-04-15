@@ -15,7 +15,7 @@ import com.example.littlelemon.storage.UserPreferences
 
 
 @Composable
-fun NavigationComposable(navHostController: NavHostController, menuItems: List<MenuItemRoom>) {
+fun NavigationComposable(navHostController: NavHostController, menuItems: List<MenuItemRoom>, menuCategories : List<String>) {
     val userSettings = UserPreferences.getUser(LocalContext.current)
     val startDestination = if (userSettings == null) OnboardingDestination.route else Home.route
 
@@ -24,7 +24,7 @@ fun NavigationComposable(navHostController: NavHostController, menuItems: List<M
             Onboarding(navHostController = navHostController)
         }
         composable(Home.route){
-            Home(navHostController = navHostController, menuItems = menuItems)
+            Home(navHostController = navHostController, menuItems = menuItems, menuCategories = menuCategories)
         }
         composable(Profile.route){
             Profile(navHostController = navHostController)

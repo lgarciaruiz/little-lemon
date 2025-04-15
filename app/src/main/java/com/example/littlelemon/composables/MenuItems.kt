@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -18,6 +19,9 @@ import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.littlelemon.storage.MenuItemRoom
+import com.example.littlelemon.ui.theme.Black
+import com.example.littlelemon.ui.theme.Gray
+import com.example.littlelemon.ui.theme.Green
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -31,14 +35,19 @@ fun MenuItems(menuItems: List<MenuItemRoom>) {
                             text = menuItem.title,
                             fontWeight = FontWeight.Bold,
                             fontSize = 24.sp,
+                            color = Black,
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                         Text(
                             text = menuItem.description,
+                            fontSize = 16.sp,
+                            color = Green,
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                         Text(
                             text = "$${menuItem.price}",
+                            fontWeight = FontWeight.Bold,
+                            color = Green,
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                     }
@@ -51,6 +60,7 @@ fun MenuItems(menuItems: List<MenuItemRoom>) {
                         .height(100.dp)
                     )
                 }
+            HorizontalDivider(color = Gray)
         }
     }
 }
