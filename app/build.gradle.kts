@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation("androidx.room:room-runtime:2.4.3")
+    implementation("com.github.bumptech.glide:compose:1.0.0-alpha.1")
     implementation(libs.androidx.runtime.livedata)
     kapt("androidx.room:room-compiler:2.4.3")
     implementation(libs.androidx.core.ktx)

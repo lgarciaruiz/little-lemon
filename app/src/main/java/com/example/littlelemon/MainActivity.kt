@@ -12,7 +12,6 @@ import com.example.littlelemon.composables.NavigationComposable
 import com.example.littlelemon.model.MenuItemNetwork
 import com.example.littlelemon.model.MenuNetwork
 import com.example.littlelemon.storage.MenuItemDatabase
-import com.example.littlelemon.storage.MenuItemRoom
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -42,7 +41,8 @@ class MainActivity : ComponentActivity() {
 
     //create MenuItemDatabase (database) by lazy to not stop the app when creating the database
     private val menuDb by lazy {
-        Room.databaseBuilder(applicationContext, MenuItemDatabase::class.java, "menu_items_db").build()
+        Room.databaseBuilder(applicationContext, MenuItemDatabase::class.java, "menu_items_db").fallbackToDestructiveMigration()
+            .build()
     }
 
     private fun saveMenuToDatabase(menuItemsNetwork: List<MenuItemNetwork>){
@@ -65,14 +65,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LittleLemonTheme {
-                val databaseMenuItems = menuDb
-                    .menuItemDao()
-                    .getAll()
-                    .observeAsState(
-                        initial = emptyList<MenuItemRoom>()
-                    ).value
+                val databaseMenuItems = menuDb.menuItemDao().getAll().observeAsState(emptyList()).value
                 val navController = rememberNavController()
-                NavigationComposable(navController)
+                NavigationComposable(navController, databaseMenuItems)
             }
         }
     }

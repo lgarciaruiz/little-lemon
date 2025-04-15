@@ -18,10 +18,12 @@ import androidx.navigation.NavHostController
 import com.example.littlelemon.R
 import com.example.littlelemon.composables.HeaderLogo
 import com.example.littlelemon.composables.Hero
+import com.example.littlelemon.composables.MenuItems
 import com.example.littlelemon.destinations.Profile
+import com.example.littlelemon.storage.MenuItemRoom
 
 @Composable
-fun Home(navHostController: NavHostController) {
+fun Home(navHostController: NavHostController, menuItems: List<MenuItemRoom>) {
     Column {
         Box(modifier = Modifier.fillMaxWidth().padding(20.dp, 5.dp)) {
             HeaderLogo(
@@ -37,5 +39,6 @@ fun Home(navHostController: NavHostController) {
             ) }
 
         Hero()
+        MenuItems(menuItems = menuItems)
     }
 }

@@ -15,7 +15,7 @@ data class MenuItemRoom(
     @PrimaryKey val id: Int,
     val title: String,
     val description: String,
-    val price: Double,
+    val price: String,
     val image: String,
     val category: String
 )
@@ -24,7 +24,9 @@ data class MenuItemRoom(
 //this is what makes the queries
 interface MenuItemDao {
     @Query("SELECT * FROM MenuItemRoom")
-    fun getAll(): LiveData<MenuItemRoom>
+    //used livedata because it is a live data object that is updated when the database is updated
+    //used list because it is a list of menu items
+    fun getAll(): LiveData<List<MenuItemRoom>>
 
     @Insert
     fun insertAll(vararg menu: MenuItemRoom)
@@ -34,7 +36,7 @@ interface MenuItemDao {
 }
 
 //database
-@Database(entities = [MenuItemRoom::class], version = 1)
+@Database(entities = [MenuItemRoom::class], version = 2)
 abstract class MenuItemDatabase : RoomDatabase() {
     abstract fun menuItemDao(): MenuItemDao
 }

@@ -27,7 +27,7 @@ data class MenuItemNetwork (
         id = id,
         title = title,
         description = description,
-        price = price.toDouble(),
+        price = price,
         image = image,
         category = category
     )
